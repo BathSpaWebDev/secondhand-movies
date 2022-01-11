@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import "./App.css";
 
-function App() {
+const App = () => {
+  const [moviesData, setMoviesData] = useState([]);
+
+  const getData = () => {
+    fetch("movies.json", {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
+      .then(response => response.json())
+      .then(data => setMoviesData(data));
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      {moviesData.map((data, index) => (
+        <div key={index}>
+          <h5>{data.movie}</h5>
+          <p>{data.year}</p>
+          <p>{data.price}</p>
+          <p>{data.stock}</p>
+          {data.genre.map((item, index) => (
+            <p key={index}>{item}</p>
+          ))}
+        </div>
+      ))}
     </div>
   );
-}
+};
 
 export default App;
