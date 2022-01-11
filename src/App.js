@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./App.css";
 
 const App = () => {
   const [moviesData, setMoviesData] = useState([]);
@@ -14,13 +15,25 @@ const App = () => {
       .then(data => setMoviesData(data));
   };
 
-  console.log(moviesData);
-
   useEffect(() => {
     getData();
   }, []);
 
-  return <div></div>;
+  return (
+    <div className="container">
+      {moviesData.map((data, index) => (
+        <div key={index}>
+          <h5>{data.movie}</h5>
+          <p>{data.year}</p>
+          <p>{data.price}</p>
+          <p>{data.stock}</p>
+          {data.genre.map((item, index) => (
+            <p key={index}>{item}</p>
+          ))}
+        </div>
+      ))}
+    </div>
+  );
 };
 
 export default App;
