@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
-import "./App.css";
-import {NavBar} from "./components/Navigation";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+// import "./App.css";
+// import { NavBar } from "./components/Navigation";
+
+import { Home, Cart, Error } from "./pages";
 
 const App = () => {
   const [moviesData, setMoviesData] = useState([]);
@@ -21,22 +24,29 @@ const App = () => {
   }, []);
 
   return (
-      <main>
-        <NavBar/>
-        <div className="container">
-          {moviesData.map((data, index) => (
-            <div key={index}>
-              <h5>{data.movie}</h5>
-              <p>{data.year}</p>
-              <p>{data.price}</p>
-              <p>{data.stock}</p>
-              {data.genre.map((item, index) => (
-                <p key={index}>{item}</p>
-              ))}
-            </div>
-          ))}
-        </div>
-      </main>
+    // <main>
+    //   <NavBar />
+    //   <div className="container">
+    //     {moviesData.map((data, index) => (
+    //       <div key={index}>
+    //         <h5>{data.movie}</h5>
+    //         <p>{data.year}</p>
+    //         <p>{data.price}</p>
+    //         <p>{data.stock}</p>
+    //         {data.genre.map((item, index) => (
+    //           <p key={index}>{item}</p>
+    //         ))}
+    //       </div>
+    //     ))}
+    //   </div>
+    // </main>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="*" element={<Error />} />
+      </Routes>
+    </Router>
   );
 };
 
