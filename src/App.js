@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
 // import "./App.css";
-// import { NavBar } from "./components/Navigation";
 
 import { Home, Cart, Error } from "./pages";
 
@@ -41,6 +41,7 @@ const App = () => {
     //   </div>
     // </main>
     <Router>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
